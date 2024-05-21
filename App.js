@@ -5,7 +5,7 @@ import AddNote from './src/screens/AddNote'
 import EditNote from './src/screens/EditNote'
 
 const CurrentPageWidget=({
-  currentPage,noteList,setCurrentPage,addNote,
+  currentPage,noteList,setCurrentPage,addNote,deleteNote
 })=>{
   switch(currentPage){
     case 'home':
@@ -13,6 +13,7 @@ const CurrentPageWidget=({
         <Home
           noteList={noteList}
           setCurrentPage={setCurrentPage}
+          deleteNote={deleteNote}
         />
       )
     case 'add':
@@ -38,6 +39,12 @@ const App = () => {
       },
     ])
   }
+
+  const deleteNote = (id)=>{
+    setNoteList(noteList.filter((item)=>item.id!== id));
+  }
+  
+
   const [currentPage,setCurrentPage]=useState('home')
   const [noteList, setNoteList] = useState([
     {
@@ -54,6 +61,8 @@ const App = () => {
       setCurrentPage={setCurrentPage}
       noteList={noteList}
       addNote={addNote}
+
+      deleteNote={deleteNote}
     />
   )
 }
